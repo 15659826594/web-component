@@ -1,0 +1,272 @@
+{
+  "pages": [
+    {
+      "path": "/dashboard",
+      "style": {
+        "navigationBarTitleText": "Projects"
+      }
+    },
+    {
+      "path": "/setting",
+      "style": {
+        "navigationBarTitleText": "Setting"
+      }
+    },
+    {
+      "path": "/component",
+      "style": {
+        "navigationBarTitleText": "Component"
+      }
+    },
+    {
+      "path": "/dropdown",
+      "style": {
+        "navigationBarTitleText": "Dropdown"
+      }
+    },
+    {
+      "path": "/basic/button",
+      "style": {
+        "navigationBarTitleText": "按钮"
+      }
+    },
+    {
+      "path": "/basic/button/text",
+      "style": {
+        "navigationBarTitleText": "文本按钮"
+      }
+    },
+    {
+      "path": "/basic/icon",
+      "style": {
+        "navigationBarTitleText": "图标"
+      }
+    },
+    {
+      "path": "/basic/layout/icon",
+      "style": {
+        "navigationBarTitleText": "图标布局"
+      }
+    },
+    {
+      "path": "/basic/layout",
+      "style": {
+        "navigationBarTitleText": "布局"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "演示",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#fff",
+    "selectedColor": "#b9b6fa",
+    "borderStyle": "black",
+    "backgroundColor": "#151357",
+    "width": "24rem",
+    "collapseWidth": "7.2rem",
+    "height": "5.6rem",
+    "fontSize": "1.4rem",
+    "iconWidth": "4rem",
+    "list": [
+      {
+        "pagePath": "/dashboard",
+        "text": "Projects",
+        "iconfont": {
+          "text": "\ue8c1",
+          "selectedText": "\ue8db",
+          "fontSize": "2.4rem"
+        }
+      },
+      {
+        "pagePath": "/setting",
+        "text": "Settings",
+        "iconfont": {
+          "text": "\ue8c7",
+          "selectedText": "\ue8bf",
+          "fontSize": "2.4rem"
+        }
+      },
+      {
+        "pagePath": "/basic",
+        "text": "Basic 基础组件",
+        "iconfont": {
+          "text": "\ueb11",
+          "selectedText": "\ueb1b",
+          "fontSize": "2.4rem"
+        },
+        "children": [
+          {
+            "pagePath": "button",
+            "text": "Button 按钮"
+          },
+          {
+            "pagePath": "border",
+            "text": "Border 边框"
+          },
+          {
+            "pagePath": "color",
+            "text": "Color 色彩",
+            "children": [
+              {
+                "pagePath": "test",
+                "text": "测试1"
+              },
+              {
+                "pagePath": "test",
+                "text": "测试2"
+              }
+            ]
+          },
+          {
+            "pagePath": "icon",
+            "text": "Icon 图标"
+          },
+          {
+            "pagePath": "layout",
+            "text": "Layout 布局"
+          }
+        ]
+      },
+      {
+        "pagePath": "/data",
+        "text": "Data 数据展示",
+        "iconfont": {
+          "text": "\ue821",
+          "selectedText": "\ue84d",
+          "fontSize": "2.4rem"
+        },
+        "children": [
+          {
+            "pagePath": "carousel",
+            "text": "Carousel 走马灯"
+          },
+          {
+            "pagePath": "collapse",
+            "text": "Collapse 折叠面板"
+          },
+          {
+            "pagePath": "tag",
+            "text": "Tag 标签"
+          },
+          {
+            "pagePath": "table",
+            "text": "Table 表格"
+          },
+          {
+            "pagePath": "timeline",
+            "text": "Timeline 时间线"
+          },
+          {
+            "pagePath": "tree",
+            "text": "Tree 树形控件"
+          },
+          {
+            "pagePath": "segmented",
+            "text": "Segmented 分段控制器"
+          }
+        ]
+      },
+      {
+        "pagePath": "/form",
+        "text": "Form 表单组件",
+        "iconfont": {
+          "text": "\ueae7",
+          "selectedText": "\ueabf",
+          "fontSize": "2.4rem"
+        },
+        "children": [
+          {
+            "pagePath": "checkbox",
+            "text": "Checkbox 多选框"
+          },
+          {
+            "pagePath": "input",
+            "text": "Input 输入框"
+          },
+          {
+            "pagePath": "radio",
+            "text": "Radio 单选框"
+          },
+          {
+            "pagePath": "select",
+            "text": "Select 选择器"
+          },
+          {
+            "pagePath": "switch",
+            "text": "Switch 开关"
+          },
+          {
+            "pagePath": "upload",
+            "text": "Upload 上传"
+          }
+        ]
+      },
+      {
+        "pagePath": "/navigation",
+        "text": "Navigation 导航",
+        "iconfont": {
+          "text": "\uea5c",
+          "selectedText": "\uea79",
+          "fontSize": "2.4rem"
+        },
+        "children": [
+          {
+            "pagePath": "menu",
+            "text": "Menu 菜单"
+          },
+          {
+            "pagePath": "dropdown",
+            "text": "Dropdown 下拉菜单"
+          },
+          {
+            "pagePath": "tabs",
+            "text": "Tabs 标签页"
+          }
+        ]
+      },
+      {
+        "pagePath": "/feedback",
+        "text": "Feedback 反馈组件",
+        "iconfont": {
+          "text": "\ue9be",
+          "selectedText": "\ue9df",
+          "fontSize": "2.4rem"
+        },
+        "children": [
+          {
+            "pagePath": "dialog",
+            "text": "Dialog 对话框"
+          },
+          {
+            "pagePath": "drawer",
+            "text": "Drawer 抽屉"
+          },
+          {
+            "pagePath": "loading",
+            "text": "Loading 加载"
+          },
+          {
+            "pagePath": "message",
+            "text": "Message 消息提示"
+          },
+          {
+            "pagePath": "messageBox",
+            "text": "MessageBox 消息弹框"
+          },
+          {
+            "pagePath": "popup",
+            "text": "Popup 弹出框"
+          },
+          {
+            "pagePath": "tooltip",
+            "text": "Tooltip 文字提示"
+          }
+        ]
+      }
+    ]
+  }
+}

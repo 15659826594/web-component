@@ -1,0 +1,117 @@
+@font-face {
+  font-family: "data-table"; /* Project id 4979211 */
+  src: url('iconfont.woff2?t=1753438786522') format('woff2');
+}
+
+.dt3_error:before {
+  content: "\e600";
+}
+
+.dt3_search:before {
+  content: "\e740";
+}
+
+.dt3_add:before {
+  content: "\e726";
+}
+
+.dt3_column-sorting:before {
+  content: "\e727";
+}
+
+.dt3_clock:before {
+  content: "\e728";
+}
+
+.dt3_cross:before {
+  content: "\e729";
+}
+
+.dt3_data:before {
+  content: "\e72a";
+}
+
+.dt3_check:before {
+  content: "\e72b";
+}
+
+.dt3_down:before {
+  content: "\e72c";
+}
+
+.dt3_dollar:before {
+  content: "\e72d";
+}
+
+.dt3_edit:before {
+  content: "\e72e";
+}
+
+.dt3_link:before {
+  content: "\e72f";
+}
+
+.dt3_filter:before {
+  content: "\e730";
+}
+
+.dt3_left:before {
+  content: "\e731";
+}
+
+.dt3_warning:before {
+  content: "\e732";
+}
+
+.dt3_more:before {
+  content: "\e733";
+}
+
+.dt3_user:before {
+  content: "\e734";
+}
+
+.dt3_shortcut:before {
+  content: "\e735";
+}
+
+.dt3_success:before {
+  content: "\e736";
+}
+
+.dt3_up-down:before {
+  content: "\e737";
+}
+
+.dt3_right:before {
+  content: "\e738";
+}
+
+.dt3_up:before {
+  content: "\e739";
+}
+
+.dt3_notes:before {
+  content: "\e73a";
+}
+
+.dt3_calendar:before {
+  content: "\e73b";
+}
+
+.dt3_down-circle:before {
+  content: "\e73c";
+}
+
+.dt3_data-table:before {
+  content: "\e73d";
+}
+
+.dt3_info:before {
+  content: "\e73e";
+}
+
+.dt3_right-circle:before {
+  content: "\e73f";
+}
+

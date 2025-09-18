@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>登录</title>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:" />
+    <link rel="stylesheet" href="/src/assets/css/base.css" />
+  </head>
+  <body>
+    <wc-control close minimize></wc-control>
+    <form id="form">
+      <img class="avatar" src="src/assets/img/electron.svg" alt="头像" />
+      <input role="input" type="text" placeholder="请输入账号" name="account" required maxlength="20" />
+      <input role="input" type="password" placeholder="请输入密码" name="password" required maxlength="20" />
+      <label class="agreement">
+        <input role="checkbox" type="checkbox" name="agree" required checked />
+        <span class="agreement-text"> 已阅读并同意 <small>用户协议</small> 和 <small>隐私保护指引</small> </span>
+      </label>
+      <button role="button" class="color-primary" type="submit">登录</button>
+      <div class="more">
+        <div>扫码登录</div>
+        <div>更多选项</div>
+      </div>
+    </form>
+  </body>
+  <script type="module" src="/src/web_components/navigation/control.js"></script>
+  <script type="module">
+    import { Loading, Message } from '/src/web_components/dialog.js'
+    document.getElementById('form').onsubmit = async (e) => {
+      e.preventDefault()
+      let formData = new FormData(e.target)
+      let json = {}
+      formData.forEach((value, key) => {
+        if (json.hasOwnProperty(key)) {
+          if (!Array.isArray(json[key])) {
+            json[key] = [json[key]]
+          }
+          json[key].push(value)
+        } else {
+          json[key] = value
+        }
+      })
+      let loading = Loading.service({
+        lock: true,
+        text: 'Loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      })
+      let res = await window.electron.ipcRenderer.invoke('login', json)
+      loading.close()
+      Message({
+        type: res.code ? 'success' : 'error',
+        message: res.msg,
+        duration: 1500
+      })
+    }
+  </script>
+  <style>
+    html,
+    body {
+      height: 100%;
+    }
+    body {
+      -webkit-app-region: drag;
+      background-image: url('@src/assets/img/mod_bg.jpg');
+      background-size: cover;
+    }
+
+    wc-control {
+      position: fixed;
+      right: 0;
+      padding: 10px;
+      flex-direction: row-reverse;
+      -webkit-app-region: no-drag;
+      z-index: var(--z-index-framework);
+    }
+
+    form {
+      -webkit-app-region: no-drag;
+      user-select: auto;
+      position: absolute;
+      inset: 62px 31px 31px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .avatar {
+        user-select: auto;
+        pointer-events: none;
+        height: 80px;
+        width: 80px;
+        border-radius: 50%;
+        border: 2px solid var(--info-100);
+        box-sizing: border-box;
+        margin-bottom: 24px;
+      }
+
+      [role='input'] {
+        height: 36px;
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+        margin-bottom: 14px;
+      }
+
+      [role='button'] {
+        height: 36px;
+        width: 100%;
+      }
+
+      .agreement {
+        margin-bottom: 24px;
+        display: flex;
+        font-size: 12px;
+        color: var(--info-700);
+        width: 100%;
+
+        .agreement-text {
+          width: 100%;
+
+          p {
+            margin: 0;
+          }
+
+          small {
+            color: var(--primary-500);
+            cursor: pointer;
+            font-size: inherit;
+          }
+        }
+      }
+
+      .more {
+        margin-top: auto;
+        color: var(--primary-500);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+
+        & > div {
+          cursor: pointer;
+          display: flex;
+
+          &:not(:last-child)::after {
+            content: '';
+            display: block;
+            width: 1px;
+            height: 10px;
+            background-color: var(--info-100);
+            margin: 6px 10px;
+          }
+        }
+      }
+      &:invalid [role='button'] {
+        cursor: not-allowed;
+        box-shadow:
+          var(--shadow-outline),
+          0 0 0 0.1rem var(--color-300) !important;
+        background-color: var(--color-300) !important;
+      }
+      &:valid [role='button'] {
+        background-color: var(--primary-500);
+      }
+    }
+  </style>
+</html>

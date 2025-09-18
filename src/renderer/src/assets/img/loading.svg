@@ -1,0 +1,13 @@
+<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg" style="color: #6c6c6c">
+    <defs>
+        <rect id="petal" x="44.2%" y="0"  width="11.6%" height="33.33%" rx="5.8%" ry="5.8%" fill="currentColor"/>
+    </defs>
+    <use href="#petal" opacity="0.27"/>
+    <use href="#petal" opacity="0.35285714" transform="rotate(45, 200 ,200)"/>
+    <use href="#petal" opacity="0.43571429" transform="rotate(90, 200 ,200)"/>
+    <use href="#petal" opacity="0.51857143" transform="rotate(135, 200 ,200)"/>
+    <use href="#petal" opacity="0.60142857" transform="rotate(180, 200 ,200)"/>
+    <use href="#petal" opacity="0.68428571" transform="rotate(225, 200 ,200)"/>
+    <use href="#petal" opacity="0.76714286" transform="rotate(270, 200 ,200)"/>
+    <use href="#petal" opacity="0.85" transform="rotate(315, 200 ,200)"/>
+</svg>

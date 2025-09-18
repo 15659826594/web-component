@@ -1,0 +1,56 @@
+[role='tabs'] {
+  display: flex;
+  gap: 0 2.4rem;
+  input[type='radio'] {
+    appearance: none;
+    margin: 0;
+    cursor: pointer;
+    position: relative;
+    padding-bottom: 0.8rem;
+    color: var(--info-700);
+    border-bottom: 0.2rem solid transparent;
+    &::before {
+      font-size: 1.4rem;
+      line-height: 2rem;
+      content: attr(label);
+      padding-right: 0.6rem;
+    }
+    &[badge] {
+      padding-right: 2.4rem;
+    }
+    &::after {
+      position: absolute;
+      padding: 0 0.6rem;
+      top: 0.2rem;
+      right: 0;
+      content: attr(badge);
+      font-size: 1rem;
+      line-height: 1.6rem;
+      border-radius: var(--radius-500);
+      color: var(--info-600);
+      background-color: var(--info-50);
+    }
+    &:hover {
+      color: var(--info-900);
+      border-bottom-color: currentColor;
+      border-bottom-width: 0.1rem;
+    }
+    &:checked {
+      color: var(--primary-500);
+      border-bottom-color: currentColor;
+      border-bottom-width: 0.2rem;
+      &::after {
+        color: currentColor;
+        background-color: var(--primary-50);
+      }
+    }
+  }
+  .sep {
+    display: inline-block;
+    width: 0.1rem;
+    height: 1.7rem;
+    margin-top: 0.25rem;
+    background-color: var(--info-100);
+    border-radius: 0.1rem;
+  }
+}
