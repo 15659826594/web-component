@@ -82,9 +82,7 @@ class Popup extends HTMLElement {
   }
   connectedCallback() {
     this.render()
-    this.#attributeChangedCallbackCache.forEach((args) => {
-      this.attributeChangedCallback(...args)
-    })
+    this.#attributeChangedCallbackCache.forEach((args) => this.attributeChangedCallback(...args))
     this.#attributeChangedCallbackCache = []
     this.addEventListener('click', this.showPopover)
   }

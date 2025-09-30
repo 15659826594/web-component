@@ -70,9 +70,7 @@ class Carousel extends HTMLElement {
   }
   connectedCallback() {
     this.render()
-    this.#attributeChangedCallbackCache.forEach((args) => {
-      this.attributeChangedCallback(...args)
-    })
+    this.#attributeChangedCallbackCache.forEach((args) => this.attributeChangedCallback(...args))
     // 初始化默认值
     if (!this.#attributeChangedCallbackCache.has('interval')) {
       this.attributeChangedCallback('interval', null, this.#interval)

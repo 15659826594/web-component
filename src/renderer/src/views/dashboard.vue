@@ -39,6 +39,14 @@
   <!--      </wc-tr>-->
   <!--    </wc-thead>-->
   <!--  </wc-table>-->
+  <div class="flex col align-items-center">
+    <wc-chat-panel mode="mobile" tab="chat" style="width: 390px; height: 844px">
+      <div slot="sidebar">个人信息</div>
+    </wc-chat-panel>
+    <wc-chat-panel tab="chat" style="width: 1160px">
+      <div slot="sidebar">个人信息</div>
+    </wc-chat-panel>
+  </div>
 
   <wc-menubar ref="vertical" mode="vertical"></wc-menubar>
   <br />

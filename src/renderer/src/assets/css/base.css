@@ -3,6 +3,10 @@
 /*@import 'table.css';*/
 @import 'tabs.css';
 
+@font-face {
+  font-family: 'boxicons';
+  src: url('boxicons.woff2?t=1758395227633') format('woff2');
+}
 /*====================
   Core
   ==================== */
@@ -2101,7 +2105,7 @@ wc-menubar {
   --indent: 1.2rem;
   --indent-level-1: 0.8rem;
   /*子菜单偏移量，inline 模式无效*/
-  --popup-offset: 0.8rem;
+  --popup-offset: 0.6rem;
   --popup-offset-level-1: 1rem;
   &.color-dark {
     --menu-bg-color: #001529;
@@ -2169,12 +2173,6 @@ wc-menubar {
       }
     }
   }
-  &:not([collapse]) {
-    li,
-    summary > .menu-item {
-      min-width: 10rem;
-    }
-  }
   /*弹窗锚点定位*/
   &:not([mode]),
   &[mode='vertical'],
@@ -2223,7 +2221,9 @@ wc-menubar {
       &:hover {
         & > summary::after {
           content: '';
+          cursor: pointer;
           background-color: rgba(0, 0, 0, 0.3);
+          /*  替换成子节点的伪元素*/
         }
         &::details-content {
           display: block;
@@ -2336,7 +2336,6 @@ wc-menubar {
       details {
         & > summary::after {
           inset: 0 calc(var(--popup-offset) * -1);
-          background-color: red;
         }
         &::details-content {
           margin: 0 var(--popup-offset);
@@ -2351,8 +2350,11 @@ wc-menubar {
       }
     }
   }
-  /*非折叠状态 , 含有子节点的设置箭头*/
-  &:not([collapse]) summary > .menu-item {
+  /*collapse状态下一级菜单特殊设计*/
+  .menu-item{
+    min-width: 10rem;
+  }
+  summary > .menu-item {
     padding-right: 3.4rem;
     &::before {
       font-family: 'data-table', 'f7-icons', serif;
@@ -2363,6 +2365,13 @@ wc-menubar {
       height: 1.6rem;
       line-height: 1.6rem;
       transition: all 300ms;
+    }
+  }
+  &[collapse] > details > summary > .menu-item {
+    min-width: auto;
+    padding-right: 1.6rem;
+    &::before {
+      content: none;
     }
   }
 }
