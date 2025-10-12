@@ -148,6 +148,6 @@ class Control extends HTMLElement {
   }
 }
 
-if (window?.electron.ipcRenderer && !customElements.get('wc-control')) {
+if (window.electron?.ipcRenderer && !customElements.get('wc-control')) {
   customElements.define('wc-control', Control)
 }

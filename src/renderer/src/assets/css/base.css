@@ -2367,6 +2367,7 @@ wc-menubar {
       transition: all 300ms;
     }
   }
+  &[collapse] > li > .menu-item,
   &[collapse] > details > summary > .menu-item {
     min-width: auto;
     padding-right: 1.6rem;

@@ -27,10 +27,6 @@ const style = (function () {
       --offset: 1.2rem;
       --arrow-offset: 5px;
       display: inline-flex;
-      [part='anchor']{
-        anchor-name: var(--anchor);
-        width: 100%;
-      }
       [part='popover'] {
         position-anchor: var(--anchor);
         margin: 0;
@@ -194,13 +190,13 @@ class Tooltip extends HTMLElement {
     if (!this.shadowRoot) this.attachShadow({ mode: 'open' })
     let anchor = `--tooltip-${Date.now().toString(36)}-${Math.random().toString(36).substring(2, 6)}`
     this.shadowRoot.innerHTML = /* language=HTML */ `
-      <div part="anchor" style="anchor-name: ${anchor}">
-        <slot></slot>
-      </div>
+      <slot></slot>
       <div id="popover" part="popover" popover="hint" style="position-anchor: ${anchor}">
         <slot name="content"></slot>
       </div>
+      <style>:host{anchor-name: ${anchor}}</style>
     `
+    this.style.setProperty('--anchor', anchor)
     this.shadowRoot.adoptedStyleSheets = [style]
   }
   showPopover() {

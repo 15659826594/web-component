@@ -90,20 +90,19 @@ class Popup extends HTMLElement {
     this.attachShadow({ mode: 'open' })
     let anchor = `--popup-${Date.now().toString(36)}-${Math.random().toString(36).substring(2, 6)}`
     this.shadowRoot.innerHTML = /* language=HTML */ `
-      <div part="anchor" style="anchor-name: ${anchor}">
-        <slot>
-          <div part="default"></div>
-        </slot>
-      </div>
+      <slot>
+        <div part="default"></div>
+      </slot>
       <div part="popover" id="popover" pseudo="picker(select)" popover="hint" style="position-anchor: ${anchor};margin: 0;">
         <slot name="reference">
-          <option value="Edit" style="color: #464F60">Edit</option>
-          <option value="Send mail" style="color: #464F60">Send mail</option>
-          <option value="Details" style="color: #464F60">Details</option>
-          <option value="Archive" style="color: #AA5B00">Archive</option>
-          <option value="Delete" style="color: #D1293D">Delete</option>
+          <option style="color: #464F60">Edit</option>
+          <option style="color: #464F60">Send mail</option>
+          <option style="color: #464F60">Details</option>
+          <option style="color: #AA5B00">Archive</option>
+          <option style="color: #D1293D">Delete</option>
         </slot>
       </div>
+      <style>:host{anchor-name: ${anchor}}</style>
     `
     let popover = this.shadowRoot.getElementById('popover')
     popover.onclick = (event) => {
