@@ -39,7 +39,7 @@
 </template>
 <script setup>
 import { h, render } from 'vue'
-import { Message } from '@src/web_components/dialog'
+import { Message } from '@src/components/web/dialog'
 const openVn = () => {
   let vnode = h('p', { style: 'line-height: 1; font-size: 14px' }, [h('span', null, 'Message can be '), h('i', { style: 'color: teal' }, 'VNode')]),
     node = document.createDocumentFragment()

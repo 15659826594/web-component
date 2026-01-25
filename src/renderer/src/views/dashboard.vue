@@ -82,10 +82,10 @@
       <tr>
         <td>1</td>
       </tr>
-      <details style="display: contents">
-        <summary style="display: contents">
+      <details>
+        <summary>
           <tr>
-            <td><input role="checkbox" type="checkbox" /></td>
+            <td><input role="checkbox" type="checkbox" /></td>1
           </tr>
         </summary>
         <tr>

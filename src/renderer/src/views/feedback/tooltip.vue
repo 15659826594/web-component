@@ -83,12 +83,6 @@
         {{ i }}
       </label>
     </div>
-    <!--    <div class="flex" style="gap: 1.2rem; margin: 1.6rem 0">-->
-    <!--      <button v-for="i in 3" :key="i" role="button" @mouseover="tooltip.showPopover">Click to open tooltip</button>-->
-    <!--      <div ref="tooltip" role="tooltip" popover="hint" show-arrow :placement="placement">-->
-    <!--        <span> Some content </span>-->
-    <!--      </div>-->
-    <!--    </div>-->
     <div class="flex custom-tooltip-anchor" style="gap: 1.2rem; margin: 1.6rem 0" :style="{ '--anchor-name': '--' + useId() }">
       <button v-for="i in 3" :key="i" role="button" @click="visable = !visable">Click to open tooltip</button>
       <div v-if="visable" role="tooltip" show-arrow :placement="placement">
@@ -101,8 +95,7 @@
 <script setup>
 import { ref, useId } from 'vue'
 
-const tooltip = ref(),
-  placements = ['top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left', 'left-start', 'left-end', 'right', 'right-start', 'right-end'],
+const placements = ['top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left', 'left-start', 'left-end', 'right', 'right-start', 'right-end'],
   placement = ref('bottom'),
   visable = ref(false)
 </script>

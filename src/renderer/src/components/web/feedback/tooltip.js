@@ -188,7 +188,7 @@ class Tooltip extends HTMLElement {
   }
   render() {
     if (!this.shadowRoot) this.attachShadow({ mode: 'open' })
-    let anchor = `--tooltip-${Date.now().toString(36)}-${Math.random().toString(36).substring(2, 6)}`
+    let anchor = '--' + crypto.randomUUID()
     this.shadowRoot.innerHTML = /* language=HTML */ `
       <slot></slot>
       <div id="popover" part="popover" popover="hint" style="position-anchor: ${anchor}">

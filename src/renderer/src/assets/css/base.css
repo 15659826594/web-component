@@ -192,7 +192,7 @@ body {
   --border-color: var(--info-50);
   --border-stroke: 1px dashed hsl(from var(--primary) calc(H + 9) calc((S + 40) * 1%) calc((L + 8) * 1%)); /* 主要用于选中状态的边框颜色 */
 
-  --shadow-outline: 0 0.1rem 0.1rem 0 rgba(from var(--color) r g b / 0.1);
+  --shadow-outline: rgba(255, 255, 255, 0.15) 0 0.1rem 0 0 inset,0 0.1rem 0.1rem 0 rgba(from var(--color) r g b / 0.1);
   --shadow-default: var(--shadow-outline), 0 0 0 0.1rem rgba(from var(--info-700) r g b / 0.16);
   --shadow-hover: var(--shadow-outline), 0 0 0 0.1rem rgba(from var(--info-700) r g b / 0.32);
   --shadow-focus: var(--shadow-outline), 0 0 0 0.1rem rgba(from var(--info-700) r g b / 0.32), 0 0 0 0.4rem rgba(from var(--primary-500) r g b / 0.4);

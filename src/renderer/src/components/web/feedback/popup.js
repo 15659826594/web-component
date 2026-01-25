@@ -88,7 +88,7 @@ class Popup extends HTMLElement {
   }
   render() {
     this.attachShadow({ mode: 'open' })
-    let anchor = `--popup-${Date.now().toString(36)}-${Math.random().toString(36).substring(2, 6)}`
+    let anchor = '--' + crypto.randomUUID()
     this.shadowRoot.innerHTML = /* language=HTML */ `
       <slot>
         <div part="default"></div>

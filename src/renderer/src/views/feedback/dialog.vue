@@ -72,7 +72,7 @@
   </dialog>
 </template>
 <script setup>
-import { MessageBox } from '@src/web_components/dialog'
+import { MessageBox } from '@src/components/web/dialog'
 import { ref, reactive } from 'vue'
 
 let dialogVisible = ref(),

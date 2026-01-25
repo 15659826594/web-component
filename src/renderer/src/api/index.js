@@ -1,4 +1,4 @@
-import { random } from '@src/web_components/utils'
+import { random } from '@src/components/web/utils'
 import avatar1 from '@assets/img/avatar/dc68e857e74de6636d06fe168d0276dc.png'
 import avatar2 from '@assets/img/avatar/78f481a6b6048b8e64f1c930830f7db8.png'
 

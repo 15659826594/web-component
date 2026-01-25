@@ -1,5 +1,23 @@
 const MAX_VALUE = Number.MAX_VALUE
 
+// 字符串转为template模板
+function htmlToFragment(html) {
+  const fragment = document.createDocumentFragment()
+  const temp = document.createElement('div')
+  temp.innerHTML = html.trim()
+  while (temp.firstChild) {
+    fragment.appendChild(temp.firstChild)
+  }
+  return fragment
+}
+// 字符串转为css样式
+function styleToSheet(style, name) {
+  let sheet = new CSSStyleSheet()
+  sheet.replaceSync(style)
+  if (name) sheet.name = name
+  return sheet
+}
+
 // 判断属性值的是否存在 , 不存在这设置默认值
 function parseBool(attr, def = false) {
   if (!attr) return def
@@ -213,6 +231,11 @@ const uniqueId = (() => {
  * @returns {string} 生成的UUID
  */
 function UUID() {
+  // 优先使用原生crypto API生成UUID
+  if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+    return crypto.randomUUID()
+  }
+  // 兼容不支持crypto.randomUUID的环境
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
     const r = (Math.random() * 16) | 0
     const v = c === 'x' ? r : (r & 0x3) | 0x8
@@ -223,4 +246,135 @@ function random(min = 0, max = MAX_VALUE) {
   return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
-export { parseBool, parsePixel, parseDuration, toCamelCase, hexToHsl, debounce, throttle, debounceRAF, uniqueId, UUID, random, sheet }
+// 拼音声母可能的首字母
+const PINYIN_INITIAL_CONSONANT_LETTERS = 'ABCDEFGHJKLMNOPQRSTWXYZ'.split('')
+// 拼音声母对应的边界中文
+const PINYIN_BOUNDARY_CHAR = '驁簿錯鵽樲鰒餜靃攟鬠纙鞪黁漚曝裠鶸蜶籜鶩鑂韻糳'.split('')
+/**
+ * 获取拼音首字母（大写）, 如果不是中文，返回原字符
+ */
+function chinesePinyinFirstLetter(str) {
+  // 空字符串直接返回
+  if (!str) {
+    return ''
+  }
+  if (str.length > 1) {
+    return str.split('').map(chinesePinyinFirstLetter).join('')
+  }
+  // 判断字符是否为中文,不是中文返回原字符
+  if (/[^\u4e00-\u9fa5]/.test(str)) {
+    return str
+  }
+  const index = PINYIN_BOUNDARY_CHAR.findIndex((char) => {
+    return char.localeCompare(str, 'zh-CN-u-co-pinyin') >= 0
+  })
+  return PINYIN_INITIAL_CONSONANT_LETTERS[index]
+}
+
+// 模拟通讯录数据（中英文混搭、含大小写、带拼音/英文名称）
+const contactList = [
+  { name: '张三', phone: '13800138000' },
+  { name: 'Apple', phone: '13900139000' },
+  { name: '李四', phone: '13700137000' },
+  { name: 'banana', phone: '13600136000' },
+  { name: '王五', phone: '13500135000' },
+  { name: 'Cat', phone: '13400134000' },
+  { name: '赵六', phone: '13300133000' },
+  { name: 'orange', phone: '13200132000' },
+  { name: '黄兴', phone: '13200132000' },
+  { name: 'h王', phone: '13100131000' }
+]
+
+// 🌟 修复版：核心排序方法，按拼音首字母分组排序
+const sortContacts = (list) => {
+  return [...list].sort((a, b) => {
+    const nameA = a.name
+    const nameB = b.name
+
+    // 获取首字符
+    const firstCharA = nameA.charAt(0).toUpperCase()
+    const firstCharB = nameB.charAt(0).toUpperCase()
+
+    // 判断是否为中文字符
+    const isChineseA = /^[\u4e00-\u9fa5]$/.test(nameA.charAt(0))
+    const isChineseB = /^[\u4e00-\u9fa5]$/.test(nameB.charAt(0))
+
+    // 如果都是中文，按拼音排序
+    if (isChineseA && isChineseB) {
+      return nameA.localeCompare(nameB, 'zh-CN', {
+        sensitivity: 'base',
+        numeric: true
+      })
+    }
+
+    // 如果都是非中文，按字母排序
+    if (!isChineseA && !isChineseB) {
+      return nameA.localeCompare(nameB, 'en', {
+        sensitivity: 'base',
+        numeric: true
+      })
+    }
+
+    // 中文和非中文混合情况，中文放在后面
+    return isChineseA ? 1 : -1
+  })
+}
+
+// ✨ 优化版：排序+首字母分组（A-Z/0-9/其他，中文按拼音首字母分组）
+const groupContacts = (list) => {
+  // 使用已有的 chinesePinyinFirstLetter 函数获取拼音首字母
+  const getGroupKey = (name) => {
+    const firstChar = name.charAt(0)
+
+    // 判断是否为中文字符
+    if (/^[\u4e00-\u9fa5]$/.test(firstChar)) {
+      // 使用工具函数获取拼音首字母
+      const pinyinLetter = chinesePinyinFirstLetter(firstChar)
+      // 返回大写字母或默认为 #
+      return /^[A-Z]$/.test(pinyinLetter) ? pinyinLetter : '#'
+    }
+
+    // 非中文：转大写后判断是否为字母/数字
+    const upperChar = firstChar.toUpperCase()
+    return /^[A-Z0-9]$/.test(upperChar) ? upperChar : '#'
+  }
+
+  // 先对联系人进行排序
+  const sorted = sortContacts(list)
+
+  // 构建分组
+  const groups = {}
+  sorted.forEach((item) => {
+    const groupKey = getGroupKey(item.name)
+
+    // 初始化分组并添加当前联系人
+    if (!groups[groupKey]) {
+      groups[groupKey] = []
+    }
+    groups[groupKey].push(item)
+  })
+
+  // 按组键排序：A-Z → 0-9 → #（最后）
+  return Object.entries(groups).sort(([k1], [k2]) => {
+    // '#' 总是在最后
+    if (k1 === '#') return 1
+    if (k2 === '#') return -1
+
+    // 数字排在字母后面
+    const k1IsNum = /^\d$/.test(k1)
+    const k2IsNum = /^\d$/.test(k2)
+
+    if (k1IsNum && !k2IsNum) return 1
+    if (!k1IsNum && k2IsNum) return -1
+
+    // 相同类型按字母顺序排序
+    return k1.localeCompare(k2, 'zh-CN', { sensitivity: 'base' })
+  })
+}
+
+// 测试：纯排序
+console.table(sortContacts(contactList))
+// 测试：排序+首字母分组
+console.dir(groupContacts(contactList))
+
+export { htmlToFragment, styleToSheet, parseBool, parsePixel, parseDuration, toCamelCase, hexToHsl, debounce, throttle, debounceRAF, uniqueId, UUID, random, sheet, chinesePinyinFirstLetter }

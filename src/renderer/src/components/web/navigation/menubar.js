@@ -9,7 +9,7 @@ class Menubar extends HTMLElement {
     super()
   }
   connectedCallback() {
-    this.#uniqueID = this.id ? this.id : `--menubar-${Date.now().toString(36)}-${Math.random().toString(36).substring(2, 6)}`
+    this.#uniqueID = this.id ? this.id : '--' + crypto.randomUUID()
   }
   render(items) {
     this.innerHTML = ''

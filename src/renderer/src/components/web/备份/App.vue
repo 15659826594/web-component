@@ -18,7 +18,7 @@
 
     <aside :collapse="effectStore.collapse" class="primary">
       <div class="logo">
-        <img src="@assets/img/logo.png" alt="logo" draggable="false" />
+        <img src="../../../assets/img/logo.png" alt="logo" draggable="false" />
       </div>
       <wc-menubar ref="menubar" :collapse="effectStore.collapse" :trigger="effectStore.collapse === null ? 'click' : 'hover'" unique-opened style="--offset: 1.6rem" @select="routeChange"></wc-menubar>
       <footer>

@@ -1,4 +1,4 @@
-import { Loading } from '@src/web_components/dialog'
+import { Loading } from '@src/components/web/dialog'
 
 export default {
   install(Vue) {
