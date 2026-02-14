@@ -116,6 +116,7 @@ const style = styleToSheet(/* language=CSS */ `
 `)
 
 class Control extends HTMLElement {
+  #init = false
   #ipcRenderer = window.electron.ipcRenderer
   static ACTION_MAP = new Map([
     ['close', 'quit'],
@@ -124,17 +125,20 @@ class Control extends HTMLElement {
   ])
   constructor() {
     super()
+    this.attachShadow({ mode: 'open' })
+    this.shadowRoot.adoptedStyleSheets = [style]
   }
   connectedCallback() {
-    this.render()
+    if (!this.#init) {
+      this.#render()
+    }
   }
-  render() {
-    let shadow = this.attachShadow({ mode: 'open' })
-    shadow.appendChild(template.cloneNode(true))
+  #render() {
+    this.shadowRoot.appendChild(template.cloneNode(true))
     this.shadowRoot.getElementById('close').onclick = this.closeHandler.bind(this)
     this.shadowRoot.getElementById('minimize').onclick = this.minimizeHandler.bind(this)
     this.shadowRoot.getElementById('maximize').onclick = this.maximizeHandler.bind(this)
-    this.shadowRoot.adoptedStyleSheets = [style]
+    this.#init = true
   }
   handleAction(action) {
     const hasSpecificAttr = this.hasAttribute(action)

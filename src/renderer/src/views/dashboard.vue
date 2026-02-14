@@ -1,7 +1,7 @@
 <template>
   <wc-table>
     <wc-colgroup>
-      <wc-col style="width: 4.6rem" />
+      <wc-col style="width: 40px" />
       <wc-col style="width: 3.6rem" />
       <wc-col style="width: 4.8rem" />
       <wc-col />
@@ -39,61 +39,61 @@
       </wc-tr>
     </wc-thead>
   </wc-table>
-  <table>
-    <colgroup>
-      <col style="width: 4.6rem" />
-      <col style="width: 3.6rem" />
-      <col style="width: 4.8rem" />
-      <col />
-      <col style="width: 4.4rem" />
-      <col style="width: 15rem" />
-      <col style="width: 20rem" />
-      <col style="width: 10rem" />
-      <col style="width: 26rem" />
-      <col style="width: 14rem" />
-      <col style="width: 4.6rem" />
-    </colgroup>
-    <thead>
-      <tr>
-        <th>
-          <input role="checkbox" type="checkbox" />
-        </th>
-        <th></th>
-        <th sort>#</th>
-        <th sort="asc">Project Name</th>
-        <th>PM</th>
-        <th>
-          <div class="flex c-center" style="gap: 0.6rem">
-            Status <wc-tooltip content="This is just a tooltip example." placement="bottom" show-arrow><i role="icon" class="block dt3_info"></i></wc-tooltip>
-          </div>
-        </th>
-        <th sort="desc">Last update</th>
-        <th>Resources</th>
-        <th>
-          <div class="flex c-center" style="gap: 0.6rem">
-            Project timeline <wc-tooltip content="This is just a tooltip example." placement="bottom" show-arrow><i role="icon" class="block dt3_info"></i></wc-tooltip>
-          </div>
-        </th>
-        <th>Estimation</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-      </tr>
-      <details>
-        <summary>
-          <tr>
-            <td><input role="checkbox" type="checkbox" /></td>1
-          </tr>
-        </summary>
-        <tr>
-          <td>3</td>
-        </tr>
-      </details>
-    </tbody>
-  </table>
+  <!--  <table>-->
+  <!--    <colgroup>-->
+  <!--      <col style="width: 4.6rem" />-->
+  <!--      <col style="width: 3.6rem" />-->
+  <!--      <col style="width: 4.8rem" />-->
+  <!--      <col />-->
+  <!--      <col style="width: 4.4rem" />-->
+  <!--      <col style="width: 15rem" />-->
+  <!--      <col style="width: 20rem" />-->
+  <!--      <col style="width: 10rem" />-->
+  <!--      <col style="width: 26rem" />-->
+  <!--      <col style="width: 14rem" />-->
+  <!--      <col style="width: 4.6rem" />-->
+  <!--    </colgroup>-->
+  <!--    <thead>-->
+  <!--      <tr>-->
+  <!--        <th>-->
+  <!--          <input role="checkbox" type="checkbox" />-->
+  <!--        </th>-->
+  <!--        <th></th>-->
+  <!--        <th sort>#</th>-->
+  <!--        <th sort="asc">Project Name</th>-->
+  <!--        <th>PM</th>-->
+  <!--        <th>-->
+  <!--          <div class="flex c-center" style="gap: 0.6rem">-->
+  <!--            Status <wc-tooltip content="This is just a tooltip example." placement="bottom" show-arrow><i role="icon" class="block dt3_info"></i></wc-tooltip>-->
+  <!--          </div>-->
+  <!--        </th>-->
+  <!--        <th sort="desc">Last update</th>-->
+  <!--        <th>Resources</th>-->
+  <!--        <th>-->
+  <!--          <div class="flex c-center" style="gap: 0.6rem">-->
+  <!--            Project timeline <wc-tooltip content="This is just a tooltip example." placement="bottom" show-arrow><i role="icon" class="block dt3_info"></i></wc-tooltip>-->
+  <!--          </div>-->
+  <!--        </th>-->
+  <!--        <th>Estimation</th>-->
+  <!--        <th></th>-->
+  <!--      </tr>-->
+  <!--    </thead>-->
+  <!--    <tbody>-->
+  <!--      <tr>-->
+  <!--        <td>1</td>-->
+  <!--      </tr>-->
+  <!--      <details>-->
+  <!--        <summary>-->
+  <!--          <tr>-->
+  <!--            <td><input role="checkbox" type="checkbox" /></td>1-->
+  <!--          </tr>-->
+  <!--        </summary>-->
+  <!--        <tr>-->
+  <!--          <td>3</td>-->
+  <!--        </tr>-->
+  <!--      </details>-->
+  <!--    </tbody>-->
+  <!--  </table>-->
   <!--  <div class="flex col align-items-center">-->
   <!--    <wc-chat-panel mode="mobile" tab="chat" style="width: 390px; height: 844px">-->
   <!--      <div slot="sidebar">个人信息</div>-->
