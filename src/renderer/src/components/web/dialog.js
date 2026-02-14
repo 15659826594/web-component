@@ -1075,7 +1075,7 @@ class Tooltip {
   constructor(popover, event) {
     this.#popover = popover
     this.#target = event.currentTarget
-    this.#popover.style.positionAnchor = this.#popover.style.positionAnchor ? this.#popover.style.positionAnchor : `--tooltip-${Date.now().toString(36)}-${Math.random().toString(36).substring(2, 6)}`
+    this.#popover.style.positionAnchor = this.#popover.style.positionAnchor ? this.#popover.style.positionAnchor : '--' + crypto.randomUUID()
     this.#popover.ontoggle = ({ newState }) => {
       if (newState === 'closed') {
         this.#timer && clearTimeout(this.#timer)

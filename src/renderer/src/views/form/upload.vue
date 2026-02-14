@@ -5,7 +5,7 @@
   </main>
 </template>
 <script setup>
-import { cutFile, cutFileThread } from '@src/web_components/file'
+import { cutFile, cutFileThread } from '@src/components/web/file'
 
 const upload = async (e) => {
   const file = e.target.files[0]

@@ -22,7 +22,7 @@
               <option value="Delete" style="color: #d1293d">Delete</option>
             </div>
           </wc-popup>
-          <wc-popup placement="top">
+          <wc-popup placement="top" @change="change">
             <div slot="reference">
               <option v-for="item in items" :key="item.value" :value="item.value" :style="{ color: item.color }">{{ item.name }}</option>
             </div>
@@ -81,7 +81,7 @@ let items = reactive([
 ])
 
 const change = (e) => {
-  console.log(e)
+  console.log(e.target.value)
 }
 </script>
 

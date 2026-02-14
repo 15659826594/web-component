@@ -48,7 +48,7 @@
   </main>
 </template>
 <script setup>
-import { Loading } from '@src/web_components/dialog'
+import { Loading } from '@src/components/web/dialog'
 import { ref } from 'vue'
 let loading = ref(true),
   fullscreenLoading = ref(false)

@@ -20,7 +20,7 @@
       <div class="logo">
         <img src="@assets/img/logo.png" alt="logo" draggable="false" />
       </div>
-      <wc-menubar ref="menubar" mode="inline" style="--popup-offset-level-1: 2.4rem; background-color: transparent" :collapse="effectStore.collapse" unique @click="routeChange"></wc-menubar>
+      <wc-menubar ref="menubar" mode="inline" unique style="--popup-offset-level-1: 2.4rem; background-color: transparent" :collapse="effectStore.collapse" @click="routeChange"></wc-menubar>
       <footer>
         <button role="icon" class="f7_sidebar_right" @click="effectStore.collapse = effectStore.collapse === null ? '' : null"></button>
       </footer>
@@ -267,6 +267,10 @@ body {
         margin: 1.5rem auto 1px;
       }
     }
+    wc-menubar {
+      flex: 1;
+      scrollbar-width: none;
+    }
     //wc-menubar {
     //  --offset: 1.6rem;
     //  --bg-color: var(--info-0);
@@ -314,6 +318,7 @@ body {
       width: 100%;
       justify-content: left;
       flex-wrap: wrap;
+      margin-top: auto;
       padding: 0.8rem 0;
       button {
         cursor: pointer;

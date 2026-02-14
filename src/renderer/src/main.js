@@ -1,6 +1,6 @@
 import '@assets/css/base.css'
 import '@src/utils/prototype'
-import '@src/web_components/install'
+import '@src/components/web/install'
 import router from '@src/router/index'
 import directive from '@src/directive/index'
 import { createApp } from 'vue'

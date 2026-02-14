@@ -120,7 +120,7 @@ class Select extends HTMLElement {
   get pickerSelect() {
     let el = this.shadowRoot.getElementById('picker-select')
     if (el) return el
-    let anchorName = `--select-${Date.now().toString(36)}-${Math.random().toString(36).substring(2, 6)}`,
+    let anchorName = '--' + crypto.randomUUID(),
       fragment = document.createDocumentFragment(),
       anchor = document.createElement('div')
     anchor.style.cssText = `anchor-name: ${anchorName}; position: absolute;inset: 0; pointer-events: none`

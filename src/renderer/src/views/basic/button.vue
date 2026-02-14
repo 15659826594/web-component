@@ -179,7 +179,7 @@
   </main>
 </template>
 <script setup>
-import { hexToHsl } from '@src/web_components/utils'
+import { hexToHsl } from '@src/components/web/utils'
 let colors = {
   '--indigo-900': '#151357',
   '--indigo-800': '#2a278f',

@@ -1,9 +1,9 @@
 [role='table'] {
+  font-size: 1.4rem;
+  line-height: 2rem;
   width: 100%;
   border-collapse: collapse;
   color: var(--info-900);
-  font-size: 1.4rem;
-  line-height: 2rem;
   th,
   td {
     padding: 0 1rem;
@@ -20,14 +20,14 @@
   }
   tbody {
     tr {
-      cursor: pointer;
       height: 4.9rem;
+      cursor: pointer;
       border-bottom: 1px solid var(--border-color);
       &:hover {
         background-color: var(--info-0);
         .tr-hover {
-          opacity: 1;
           pointer-events: auto;
+          opacity: 1;
         }
         [role~='link']::after {
           content: '\e72f';
@@ -44,29 +44,29 @@
     color: var(--info-500);
   }
   [role='col-header'] {
-    cursor: default;
-    height: 3.5rem;
     font-size: 1.2rem;
     line-height: 1.8rem;
-    color: var(--info-500);
+    height: 3.5rem;
+    cursor: default;
     vertical-align: middle;
-    backdrop-filter: blur(4px);
+    color: var(--info-500);
     border-bottom: 1px solid var(--border-color);
     background-color: rgba(from var(--info-0) r g b / 0.8);
+    backdrop-filter: blur(4px);
     [sort] {
       &::after {
         font-family: 'data-table', serif !important;
-        content: '\e727';
+        font-size: 1.6rem;
+        line-height: 1.6rem;
         display: inline-block;
         width: 1.6rem;
         height: 1.6rem;
         margin-left: 0.2rem;
-        vertical-align: bottom;
-        font-size: 1.6rem;
-        line-height: 1.6rem;
+        content: '\e727';
         text-align: center;
-        background-clip: text;
+        vertical-align: bottom;
         color: transparent;
+        background-clip: text;
       }
       &:hover {
         color: var(--info-700);
@@ -86,8 +86,8 @@
   &.sticky-header {
     thead {
       position: sticky;
-      top: 0;
       z-index: 99;
+      top: 0;
       tr:not([role='col-header']) {
         background-color: var(--color-background);
       }
@@ -95,9 +95,9 @@
   }
 }
 [role='table-header'] {
-  padding: 2rem 2rem 0;
   display: flex;
   flex-direction: column;
+  padding: 2rem 2rem 0;
   .setting {
     vertical-align: bottom;
     & > .icon {
@@ -106,26 +106,26 @@
   }
 }
 [role='table-page'] {
-  margin-left: 2rem;
   display: flex;
   align-items: center;
+  margin-left: 2rem;
   color: #171c26;
   span {
     color: #687182;
   }
   button {
-    border: none;
     width: 2.4rem;
     height: 2rem;
-    border-radius: 0.6rem;
     padding: 0.2rem 0.4rem;
+    border: none;
+    border-radius: 0.6rem;
     &::before {
-      content: '';
       display: block;
       width: 1.6rem;
       height: 1.6rem;
-      background-size: contain;
+      content: '';
       background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBmaWxsPSJub25lIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij48Zz48ZyB0cmFuc2Zvcm09Im1hdHJpeCgwLC0xLDEsMCwtNiwxNy41KSI+PHBhdGggZD0iTTcuMDMwMzMsMTEuOTY5NjdDNi43Mzc0MzcsMTEuNjc2Nzc2OCw2LjI2MjU2MywxMS42NzY3NzY4LDUuOTY5NjcsMTEuOTY5NjdDNS42NzY3NzY4LDEyLjI2MjU2Myw1LjY3Njc3NjgsMTIuNzM3NDM3LDUuOTY5NjcsMTMuMDMwMzNDNS45Njk2NywxMy4wMzAzMyw3LjAzMDMzLDExLjk2OTY3LDcuMDMwMzMsMTEuOTY5NjdDNy4wMzAzMywxMS45Njk2Nyw3LjAzMDMzLDExLjk2OTY3LDcuMDMwMzMsMTEuOTY5NjdaTTkuNSwxNS41QzkuNSwxNS41LDguOTY5NjcsMTYuMDMwMzMsOC45Njk2NywxNi4wMzAzM0M5LjI2MjU2LDE2LjMyMzIyLDkuNzM3NDQsMTYuMzIzMjIsMTAuMDMwMzMsMTYuMDMwMzNDMTAuMDMwMzMsMTYuMDMwMzMsOS41LDE1LjUsOS41LDE1LjVDOS41LDE1LjUsOS41LDE1LjUsOS41LDE1LjVaTTEzLjAzMDMzLDEzLjAzMDMzQzEzLjMyMzIyLDEyLjczNzQzNywxMy4zMjMyMiwxMi4yNjI1NjMsMTMuMDMwMzMsMTEuOTY5NjdDMTIuNzM3NDQsMTEuNjc2Nzc2OCwxMi4yNjI1NiwxMS42NzY3NzY4LDExLjk2OTY3LDExLjk2OTY3QzExLjk2OTY3LDExLjk2OTY3LDEzLjAzMDMzLDEzLjAzMDMzLDEzLjAzMDMzLDEzLjAzMDMzQzEzLjAzMDMzLDEzLjAzMDMzLDEzLjAzMDMzLDEzLjAzMDMzLDEzLjAzMDMzLDEzLjAzMDMzWk01Ljk2OTY3LDEzLjAzMDMzQzUuOTY5NjcsMTMuMDMwMzMsOC45Njk2NywxNi4wMzAzMyw4Ljk2OTY3LDE2LjAzMDMzQzguOTY5NjcsMTYuMDMwMzMsMTAuMDMwMzMsMTQuOTY5NjcsMTAuMDMwMzMsMTQuOTY5NjdDMTAuMDMwMzMsMTQuOTY5NjcsNy4wMzAzMywxMS45Njk2Nyw3LjAzMDMzLDExLjk2OTY3QzcuMDMwMzMsMTEuOTY5NjcsNS45Njk2NywxMy4wMzAzMyw1Ljk2OTY3LDEzLjAzMDMzQzUuOTY5NjcsMTMuMDMwMzMsNS45Njk2NywxMy4wMzAzMyw1Ljk2OTY3LDEzLjAzMDMzWk0xMC4wMzAzMywxNi4wMzAzM0MxMC4wMzAzMywxNi4wMzAzMywxMy4wMzAzMywxMy4wMzAzMywxMy4wMzAzMywxMy4wMzAzM0MxMy4wMzAzMywxMy4wMzAzMywxMS45Njk2NywxMS45Njk2NywxMS45Njk2NywxMS45Njk2N0MxMS45Njk2NywxMS45Njk2Nyw4Ljk2OTY3LDE0Ljk2OTY3LDguOTY5NjcsMTQuOTY5NjdDOC45Njk2NywxNC45Njk2NywxMC4wMzAzMywxNi4wMzAzMywxMC4wMzAzMywxNi4wMzAzM0MxMC4wMzAzMywxNi4wMzAzMywxMC4wMzAzMywxNi4wMzAzMywxMC4wMzAzMywxNi4wMzAzM1oiIGZpbGw9IiM0NjRGNjAiIGZpbGwtb3BhY2l0eT0iMSIvPjwvZz48L2c+PC9zdmc+');
+      background-size: contain;
     }
     &:disabled {
       background-color: var(--info-0);
@@ -145,52 +145,52 @@
   }
 }
 [role~='datetime'].block {
-  display: inline-block;
-  border-radius: var(--radius-300);
-  padding: 0.1rem 0.8rem;
   font-size: 1.2rem;
   line-height: 1.8rem;
-  color: var(--info-700);
-  background-color: var(--info-50);
+  display: inline-block;
   min-width: 7rem;
+  padding: 0.1rem 0.8rem;
   text-align: center;
+  color: var(--info-700);
+  border-radius: var(--radius-300);
+  background-color: var(--info-50);
   &:empty::before {
-    all: unset;
     content: '-';
+    all: unset;
   }
   &:has(+ [role~='datetime'].block) {
     position: relative;
     margin-right: 3rem;
     &::after {
       font-family: 'data-table', serif !important;
-      content: '\e738';
+      font-size: 1.6rem;
       position: absolute;
       top: 0.2rem;
       left: calc(100% + 0.7rem);
       display: block;
       width: 1.6rem;
       height: 1.6rem;
-      font-size: 1.6rem;
+      content: '\e738';
       text-align: center;
       color: var(--info-400);
     }
   }
 }
 [role~='datetime'] {
-  position: relative;
   font-size: 1.4rem;
   line-height: 2rem;
-  color: var(--info-900);
+  position: relative;
   padding-left: 2.2rem;
+  color: var(--info-900);
   &::before {
+    font-size: 1.6rem;
+    line-height: 1.6rem;
     position: absolute;
     top: 0.2rem;
     left: 0;
     width: 1.6rem;
     height: 1.6rem;
-    font-size: 1.6rem;
     text-align: center;
-    line-height: 1.6rem;
     color: var(--primary-500);
   }
 }

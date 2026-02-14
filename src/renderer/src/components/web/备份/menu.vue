@@ -45,7 +45,7 @@
   </main>
 </template>
 <script setup>
-import pageJSON from '../../pages.json'
+import pageJSON from '../../../pages.json'
 import { ref } from 'vue'
 let trigger = ref(null),
   collapse = ref(null),

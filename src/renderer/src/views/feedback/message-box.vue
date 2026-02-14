@@ -30,7 +30,7 @@
 </template>
 <script setup>
 import { h, render } from 'vue'
-import { MessageBox, Message } from '@src/web_components/dialog'
+import { MessageBox, Message } from '@src/components/web/dialog'
 const open = () => {
   MessageBox.alert('This is a message', 'Title', {
     // if you want to disable its autofocus

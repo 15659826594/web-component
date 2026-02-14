@@ -1074,7 +1074,7 @@ HTMLElement.prototype.showPopover = function (event) {
   switch (this.role) {
     case 'tooltip': {
       if (!this.style.positionAnchor) {
-        this.style.positionAnchor = `--tooltip-${Date.now().toString(36)}-${Math.random().toString(36).substring(2, 6)}`
+        this.style.positionAnchor = '--' + crypto.randomUUID()
       }
       if (this.__anchor) {
         this.__anchor.style.removeProperty('anchor-name')

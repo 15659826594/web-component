@@ -598,7 +598,7 @@ const style = (function () {
         &>button{
           position: absolute;
           left: 16px;
-          top: 12px;
+          top: 14px;
           z-index: 10;
         }
       }
@@ -693,16 +693,10 @@ class ChatPanel extends HTMLElement {
     }
     // 打开聊天记录
     Array.from(this.shadowRoot.getElementById('pills-chat').lastElementChild.children).forEach((item) => {
-      item.onclick = () => {
-        this.toggleAttribute('log')
-      }
+      item.onclick = () => this.toggleAttribute('log')
     })
-    this.shadowRoot.getElementById('main-back').onclick = () => {
-      this.toggleAttribute('log', false)
-    }
-    this.shadowRoot.getElementById('sidebar-back').onclick = () => {
-      this.toggleAttribute('sidebar', false)
-    }
+    this.shadowRoot.getElementById('main-back').onclick = () => this.toggleAttribute('log', false)
+    this.shadowRoot.getElementById('sidebar-back').onclick = () => this.toggleAttribute('sidebar', false)
 
     this.#attributeChangedCallbackCache.forEach((args) => this.attributeChangedCallback(...args))
     if (!this.#attributeChangedCallbackCache.has('tab')) {
