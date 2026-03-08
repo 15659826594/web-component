@@ -36,6 +36,9 @@ const style = (function () {
 })()
 
 class Carousel extends HTMLElement {
+  static {
+    customElements.define('wc-carousel', this)
+  }
   #timer = null
   // 初始状态激活的幻灯片的索引，从 0 开始
   #initialIndex = 0
@@ -62,12 +65,16 @@ class Carousel extends HTMLElement {
    * @type {Map<Element, Element>}
    */
   #nextCloneNode = new Map()
-  static get observedAttributes() {
-    return ['initial-index', 'interval', 'loop', 'autoplay', 'pause-on-hover']
-  }
+  #attributeChangedCallbackCache = new Map([])
+
   constructor() {
     super()
   }
+
+  static get observedAttributes() {
+    return ['initial-index', 'interval', 'loop', 'autoplay', 'pause-on-hover']
+  }
+
   connectedCallback() {
     this.render()
     this.#attributeChangedCallbackCache.forEach((args) => this.attributeChangedCallback(...args))
@@ -87,6 +94,7 @@ class Carousel extends HTMLElement {
     this.#attributeChangedCallbackCache.clear()
     document.addEventListener('visibilitychange', this.visibilitychange)
   }
+
   setInterval() {
     this.#timer && clearInterval(this.#timer)
     if (this.#autoplay && this.#loop) {
@@ -95,13 +103,16 @@ class Carousel extends HTMLElement {
       }, this.#interval)
     }
   }
+
   clearInterval() {
     clearInterval(this.#timer)
     this.#timer = null
   }
+
   visibilitychange = () => {
     document.visibilityState === 'visible' ? this.setInterval() : this.clearInterval()
   }
+
   render() {
     this.attachShadow({ mode: 'open' })
     let container = document.createElement('div'),
@@ -148,6 +159,7 @@ class Carousel extends HTMLElement {
     this.shadowRoot.append(container, left, right, group)
     this.shadowRoot.adoptedStyleSheets = [style]
   }
+
   renderMarkerGroup() {
     let group = this.shadowRoot.getElementById('scroll-marker-group')
     let fragment = document.createDocumentFragment()
@@ -162,6 +174,7 @@ class Carousel extends HTMLElement {
     })
     group.replaceChildren(fragment)
   }
+
   prev() {
     let { length } = this.#carousels
     if (this.#activeIndex === 0) {
@@ -174,6 +187,7 @@ class Carousel extends HTMLElement {
       this.moveTo(this.#activeIndex - 1, this.#activeIndex)
     }
   }
+
   next() {
     let { length } = this.#carousels
     if (this.#activeIndex === length - 1) {
@@ -186,6 +200,7 @@ class Carousel extends HTMLElement {
       this.moveTo(this.#activeIndex + 1, this.#activeIndex)
     }
   }
+
   moveTo(index, oldIndex) {
     let { length } = this.#carousels
     this.#activeIndex = index
@@ -197,6 +212,7 @@ class Carousel extends HTMLElement {
     this.shadowRoot.getElementById('container').style.removeProperty('transition')
     this.targetCurrent(oldIndex)
   }
+
   targetCurrent(oldIndex) {
     let group = this.shadowRoot.getElementById('scroll-marker-group')
     if (oldIndex === undefined) {
@@ -206,6 +222,7 @@ class Carousel extends HTMLElement {
       group.children[this.#activeIndex].part.add('target-current')
     }
   }
+
   renderLoop(bool) {
     function clearCloneNode(map) {
       if (!map.size) return
@@ -240,7 +257,7 @@ class Carousel extends HTMLElement {
       this.prepend(next)
     }
   }
-  #attributeChangedCallbackCache = new Map([])
+
   attributeChangedCallback(name, oldVal, newVal) {
     switch (name) {
       case 'initial-index': {
@@ -294,6 +311,4 @@ class Carousel extends HTMLElement {
   }
 }
 
-if (!customElements.get('wc-carousel')) {
-  customElements.define('wc-carousel', Carousel)
-}
+export default Carousel

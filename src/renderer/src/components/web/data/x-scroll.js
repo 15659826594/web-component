@@ -24,6 +24,9 @@ const style = (function () {
 })()
 
 class XScroll extends HTMLElement {
+  static {
+    customElements.define('wc-xscroll', this)
+  }
   #node = new Map()
   constructor() {
     super()
@@ -69,6 +72,4 @@ class XScroll extends HTMLElement {
   }
 }
 
-if (!customElements.get('wc-xscroll')) {
-  customElements.define('wc-xscroll', XScroll)
-}
+export default XScroll

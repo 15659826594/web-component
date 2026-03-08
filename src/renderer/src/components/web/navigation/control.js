@@ -116,13 +116,19 @@ const style = styleToSheet(/* language=CSS */ `
 `)
 
 class Control extends HTMLElement {
-  #init = false
-  #ipcRenderer = window.electron.ipcRenderer
+  static {
+    if (window.electron?.ipcRenderer) {
+      customElements.define('wc-control', this)
+    }
+  }
   static ACTION_MAP = new Map([
     ['close', 'quit'],
     ['minimize', 'minimize'],
     ['maximize', 'fullScreenToggle']
   ])
+  #init = false
+  #ipcRenderer = window.electron.ipcRenderer
+
   constructor() {
     super()
     this.attachShadow({ mode: 'open' })
@@ -158,7 +164,4 @@ class Control extends HTMLElement {
     this.handleAction('maximize')
   }
 }
-
-if (window.electron?.ipcRenderer && !customElements.get('wc-control')) {
-  customElements.define('wc-control', Control)
-}
+export default Control

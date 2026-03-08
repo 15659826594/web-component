@@ -1,16 +1,24 @@
 class Menubar extends HTMLElement {
+  static {
+    customElements.define('wc-menubar', this)
+  }
   #collapse = false // inline 时菜单是否收起状态
   #mode = 'vertical' // vertical | horizontal | inline
   #uniqueID = ''
-  static get observedAttributes() {
-    return ['mode', 'collapse', 'unique']
-  }
+  #attributeChangedCallbackCache = []
+
   constructor() {
     super()
   }
+
+  static get observedAttributes() {
+    return ['mode', 'collapse', 'unique']
+  }
+
   connectedCallback() {
     this.#uniqueID = this.id ? this.id : '--' + crypto.randomUUID()
   }
+
   render(items) {
     this.innerHTML = ''
     let fragment = document.createDocumentFragment()
@@ -18,6 +26,7 @@ class Menubar extends HTMLElement {
     this.append(fragment)
     this.#attributeChangedCallbackCache.forEach((args) => this.attributeChangedCallback(...args))
   }
+
   createMenu(items, parentNode, level = 1) {
     items.forEach((item, index) => {
       let node, menuItem
@@ -41,6 +50,7 @@ class Menubar extends HTMLElement {
       parentNode.append(node)
     })
   }
+
   renderMenuItem(node, config) {
     let div = document.createElement('div')
     div.classList.add('menu-item')
@@ -56,7 +66,7 @@ class Menubar extends HTMLElement {
     div.append(span)
     node.append(div)
   }
-  #attributeChangedCallbackCache = []
+
   attributeChangedCallback(name, oldVal, newVal) {
     if (!this.childElementCount) {
       this.#attributeChangedCallbackCache.push(arguments)
@@ -95,6 +105,4 @@ class Menubar extends HTMLElement {
   disconnectedCallback() {}
 }
 
-if (!customElements.get('wc-menubar')) {
-  customElements.define('wc-menubar', Menubar)
-}
+export default Menubar

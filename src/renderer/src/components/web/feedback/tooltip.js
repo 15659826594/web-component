@@ -163,6 +163,9 @@ const style = (function () {
 })()
 
 class Tooltip extends HTMLElement {
+  static {
+    customElements.define('wc-tooltip', this)
+  }
   /**
    * 存储事件类型与对应处理函数映射的 Map
    * 用于管理 tooltip 触发事件的监听器
@@ -173,12 +176,16 @@ class Tooltip extends HTMLElement {
   #showAfter = 0 //在触发后多久显示内容
   #hideAfter = 200 //延迟关闭，单位毫秒
   #trigger = 'hover' //如何触发 Tooltip 'hover' | 'click' | 'focus' | 'contextmenu'
-  static get observedAttributes() {
-    return ['content', 'fallback-placements', 'show-after', 'hide-after', 'trigger']
-  }
+  #attributeChangedCallbackCache = new Map()
+
   constructor() {
     super()
   }
+
+  static get observedAttributes() {
+    return ['content', 'fallback-placements', 'show-after', 'hide-after', 'trigger']
+  }
+
   connectedCallback() {
     this.render()
     this.#attributeChangedCallbackCache.forEach((args) => this.attributeChangedCallback(...args))
@@ -186,6 +193,7 @@ class Tooltip extends HTMLElement {
     if (!this.#attributeChangedCallbackCache.has('trigger')) this.attributeChangedCallback('trigger', null, this.#trigger)
     this.#attributeChangedCallbackCache.clear()
   }
+
   render() {
     if (!this.shadowRoot) this.attachShadow({ mode: 'open' })
     let anchor = '--' + crypto.randomUUID()
@@ -199,18 +207,20 @@ class Tooltip extends HTMLElement {
     this.style.setProperty('--anchor', anchor)
     this.shadowRoot.adoptedStyleSheets = [style]
   }
+
   showPopover() {
     this.#timer && clearTimeout(this.#timer)
     setTimeout(() => {
       this.shadowRoot.getElementById('popover').showPopover()
     }, this.#showAfter)
   }
+
   hidePopover() {
     this.#timer = setTimeout(() => {
       this.shadowRoot.getElementById('popover').hidePopover()
     }, this.#hideAfter)
   }
-  #attributeChangedCallbackCache = new Map()
+
   attributeChangedCallback(name, oldVal, newVal) {
     if (!this.shadowRoot) {
       this.#attributeChangedCallbackCache.set(name, arguments)
@@ -307,6 +317,4 @@ class Tooltip extends HTMLElement {
   }
 }
 
-if (!customElements.get('wc-tooltip')) {
-  customElements.define('wc-tooltip', Tooltip)
-}
+export default Tooltip

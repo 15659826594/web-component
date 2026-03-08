@@ -156,7 +156,6 @@
   background-color: var(--info-50);
   &:empty::before {
     content: '-';
-    all: unset;
   }
   &:has(+ [role~='datetime'].block) {
     position: relative;

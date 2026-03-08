@@ -985,16 +985,19 @@ dialog {
   -webkit-app-region: none;
   overscroll-behavior: none;
   [role~='close'] {
+    font-style: inherit;
     position: absolute;
     top: 0;
     right: 0;
+    box-sizing: content-box;
     width: var(--close-size);
     height: var(--close-size);
     padding: 1rem;
     cursor: pointer;
     color: var(--info-300);
+    border: none;
+    background-color: transparent;
     --close-size: 2.2rem;
-    all: unset;
     &:hover {
       color: var(--info-400);
     }

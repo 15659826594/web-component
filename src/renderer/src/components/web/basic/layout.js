@@ -32,10 +32,10 @@ for (const [size, media] of medias) {
 
 // noinspection CssUnresolvedCustomProperty
 class Row extends HTMLElement {
-  #gutter = ''
-  static get observedAttributes() {
-    return ['gutter']
+  static {
+    customElements.define('wc-row', this)
   }
+  #gutter = ''
   #stylesheet = /* language=CSS */ `
     :host {
       display: flex;
@@ -73,6 +73,15 @@ class Row extends HTMLElement {
       align-items: end;
     }
   `
+
+  constructor() {
+    super()
+  }
+
+  static get observedAttributes() {
+    return ['gutter']
+  }
+
   props(observedAttributes) {
     for (const attr of observedAttributes) {
       let attribute = this.attributes[attr]
@@ -98,9 +107,7 @@ class Row extends HTMLElement {
       }
     }
   }
-  constructor() {
-    super()
-  }
+
   connectedCallback() {
     this.props(Row.observedAttributes)
     this.render()
@@ -120,6 +127,10 @@ class Row extends HTMLElement {
 
 // noinspection CssUnresolvedCustomProperty
 class Col extends HTMLElement {
+  static {
+    customElements.define('wc-col', this)
+    registerCSSLayout()
+  }
   #stylesheet = /* language=CSS */ `
     :host {
       box-sizing: border-box;
@@ -178,8 +189,4 @@ function registerCSSLayout() {
   document.adoptedStyleSheets = [...document.adoptedStyleSheets, ...layoutsheets]
 }
 
-if (!customElements.get('wc-row')) {
-  registerCSSLayout()
-  customElements.define('wc-row', Row)
-  customElements.define('wc-col', Col)
-}
+export { Row, Col }

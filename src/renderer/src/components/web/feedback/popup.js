@@ -74,18 +74,26 @@ const style = (function () {
 })()
 
 class Popup extends HTMLElement {
-  static get observedAttributes() {
-    return ['fallback-placements']
+  static {
+    customElements.define('wc-popup', this)
   }
+  #attributeChangedCallbackCache = []
+
   constructor() {
     super()
   }
+
+  static get observedAttributes() {
+    return ['fallback-placements']
+  }
+
   connectedCallback() {
     this.render()
     this.#attributeChangedCallbackCache.forEach((args) => this.attributeChangedCallback(...args))
     this.#attributeChangedCallbackCache = []
     this.addEventListener('click', this.showPopover)
   }
+
   render() {
     this.attachShadow({ mode: 'open' })
     let anchor = '--' + crypto.randomUUID()
@@ -119,10 +127,11 @@ class Popup extends HTMLElement {
     }
     this.shadowRoot.adoptedStyleSheets = [style]
   }
+
   showPopover() {
     this.shadowRoot.getElementById('popover').showPopover()
   }
-  #attributeChangedCallbackCache = []
+
   attributeChangedCallback(name, oldVal, newVal) {
     if (!this.shadowRoot) {
       this.#attributeChangedCallbackCache.push(arguments)
@@ -161,6 +170,4 @@ class Popup extends HTMLElement {
   }
 }
 
-if (!customElements.get('wc-popup')) {
-  customElements.define('wc-popup', Popup)
-}
+export default Popup

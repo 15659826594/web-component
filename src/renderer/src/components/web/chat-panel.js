@@ -638,12 +638,22 @@ const style = (function () {
 })()
 
 class ChatPanel extends HTMLElement {
-  static get observedAttributes() {
-    return ['tab']
+  static {
+    customElements.define('wc-chat-panel', this)
   }
+  /**
+   * @type {Map<string, any>}
+   */
+  #attributeChangedCallbackCache = new Map()
+
   constructor() {
     super()
   }
+
+  static get observedAttributes() {
+    return ['tab']
+  }
+
   connectedCallback() {
     this.attachShadow({ mode: 'open' })
     this.render()
@@ -714,6 +724,7 @@ class ChatPanel extends HTMLElement {
     )
     this.#attributeChangedCallbackCache.clear()
   }
+
   render() {
     this.shadowRoot.innerHTML = /* language=HTML */ `
       <aside>
@@ -858,10 +869,7 @@ class ChatPanel extends HTMLElement {
     `
     this.shadowRoot.adoptedStyleSheets = [style]
   }
-  /**
-   * @type {Map<string, any>}
-   */
-  #attributeChangedCallbackCache = new Map()
+
   attributeChangedCallback(name, oldVal, newVal) {
     if (!this.shadowRoot) {
       this.#attributeChangedCallbackCache.set(name, arguments)
@@ -884,6 +892,4 @@ class ChatPanel extends HTMLElement {
   disconnectedCallback() {}
 }
 
-if (!customElements.get('wc-chat-panel')) {
-  customElements.define('wc-chat-panel', ChatPanel)
-}
+export default ChatPanel

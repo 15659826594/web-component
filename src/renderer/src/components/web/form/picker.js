@@ -1,4 +1,9 @@
+// noinspection CssUnresolvedCustomProperty
 class Picker extends HTMLElement {
+  static {
+    customElements.define('wc-picker', this)
+  }
+
   stylesheet = /* language=CSS */ `
     :host {
       display: inline-block;
@@ -213,14 +218,25 @@ class Picker extends HTMLElement {
     }
   `
   node = new Map()
-  static formAssociated = true
   locales = 'zh-cn'
+
+  constructor() {
+    super()
+    this.internals = this.attachInternals()
+  }
+
+  static get formAssociated() {
+    return true
+  }
+
   static get observedAttributes() {
     return ['value', 'mode', 'start', 'end', 'fields', 'placeholder']
   }
+
   get value() {
     return this.getAttribute('value')
   }
+
   set value(value) {
     if (value === null) {
       this.removeAttribute('value')
@@ -229,13 +245,11 @@ class Picker extends HTMLElement {
     this.setAttribute('value', value)
     this.internals.setFormValue(value)
   }
+
   get pickerMode() {
     return this.getAttribute('mode')
   }
-  constructor() {
-    super()
-    this.internals = this.attachInternals()
-  }
+
   connectedCallback() {
     this.tabIndex = 0
     if (!this.node.shadow) this.node.shadow = this.attachShadow({ mode: 'open' })
@@ -465,6 +479,4 @@ class Picker extends HTMLElement {
   }
 }
 
-if (!customElements.get('wc-picker')) {
-  customElements.define('wc-picker', Picker)
-}
+export default Picker

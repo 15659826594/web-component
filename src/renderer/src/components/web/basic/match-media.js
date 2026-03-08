@@ -6,6 +6,9 @@ function CSSupports(attr, value, suffix = 'px') {
 }
 
 class MatchMedia extends HTMLElement {
+  static {
+    customElements.define('wc-match-media', this)
+  }
   /**
    * @private
    * @type {HTMLSlotElement | null}
@@ -33,9 +36,15 @@ class MatchMedia extends HTMLElement {
     }`)
     return sheet
   })()
+
+  constructor() {
+    super()
+  }
+
   static get observedAttributes() {
     return ['min-width', 'max-width', 'width', 'min-height', 'max-height', 'height', 'orientation']
   }
+
   props(observedAttributes) {
     for (const attr of observedAttributes) {
       let attribute = this.attributes[attr]
@@ -83,9 +92,7 @@ class MatchMedia extends HTMLElement {
     }
     window.matchMedia(this.createMediaQuery())
   }
-  constructor() {
-    super()
-  }
+
   connectedCallback() {
     this.props(MatchMedia.observedAttributes)
     this.render()
@@ -149,6 +156,4 @@ class MatchMedia extends HTMLElement {
   disconnectedCallback() {}
 }
 
-if (!customElements.get('wc-match-media')) {
-  customElements.define('wc-match-media', MatchMedia)
-}
+export default MatchMedia

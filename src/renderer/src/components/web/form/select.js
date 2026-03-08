@@ -30,7 +30,9 @@ const style = (function () {
 })()
 
 class Select extends HTMLElement {
-  static formAssociated = true
+  static {
+    customElements.define('wc-select', this)
+  }
   /**
    * @type { ElementInternals }
    */
@@ -43,24 +45,39 @@ class Select extends HTMLElement {
    * @type { HTMLOptionElement|null }
    */
   #modelValue = null
+
+  constructor() {
+    super()
+  }
+
+  static get formAssociated() {
+    return true
+  }
+
   static get observedAttributes() {
     return ['disabled', 'placeholder', 'required']
   }
+
   set label(str) {
     this.shadowRoot.firstElementChild.innerHTML = str
   }
+
   set open(flag) {
     flag ? this.#internals.states.add('open') : this.#internals.states.delete('open')
   }
+
   get disabled() {
     return this.#internals?.states.has('disabled')
   }
+
   set disabled(flag) {
     flag ? this.#internals?.states.add('disabled') : this.#internals?.states.delete('disabled')
   }
+
   get value() {
     return this.#option?.value
   }
+
   /**
    * 设置value属性，接受string或DOM节点
    * @param {HTMLOptionElement|string} opt - 要设置的值
@@ -94,29 +111,7 @@ class Select extends HTMLElement {
       this.dispatchEvent(new Event('input'))
     }
   }
-  constructor() {
-    super()
-  }
-  connectedCallback() {
-    // An invalid form control with name='xx' is not focusable
-    this.tabIndex = 0
-    this.attachShadow({ mode: 'open' })
-    this.#internals = this.attachInternals()
-    this.render()
-  }
-  render() {
-    this.shadowRoot.innerHTML = /* language=HTML */ `
-      <div aria-hidden="true"></div>
-      <slot id="select-button" name="select-button"></slot>
-      <div part="picker-icon" style="margin-inline-start: auto"></div>
-    `
-    this.addEventListener('click', this._onClick)
-    this.shadowRoot.adoptedStyleSheets = [style]
-    // value值相等的option => 选中的option => 如果没有占位符,第一个option => 占位符
-    let opt = this.#modelValue || this.querySelector('option:checked') || (!this.hasAttribute('placeholder') && this.querySelector('option'))
-    if (opt) this.value = opt
-    Select.observedAttributes.forEach((attr) => this.attributeChangedCallback(attr))
-  }
+
   get pickerSelect() {
     let el = this.shadowRoot.getElementById('picker-select')
     if (el) return el
@@ -143,6 +138,29 @@ class Select extends HTMLElement {
     this.shadowRoot.getElementById('select-button').after(fragment)
     return el
   }
+
+  connectedCallback() {
+    // An invalid form control with name='xx' is not focusable
+    this.tabIndex = 0
+    this.attachShadow({ mode: 'open' })
+    this.#internals = this.attachInternals()
+    this.render()
+  }
+
+  render() {
+    this.shadowRoot.innerHTML = /* language=HTML */ `
+      <div aria-hidden="true"></div>
+      <slot id="select-button" name="select-button"></slot>
+      <div part="picker-icon" style="margin-inline-start: auto"></div>
+    `
+    this.addEventListener('click', this._onClick)
+    this.shadowRoot.adoptedStyleSheets = [style]
+    // value值相等的option => 选中的option => 如果没有占位符,第一个option => 占位符
+    let opt = this.#modelValue || this.querySelector('option:checked') || (!this.hasAttribute('placeholder') && this.querySelector('option'))
+    if (opt) this.value = opt
+    Select.observedAttributes.forEach((attr) => this.attributeChangedCallback(attr))
+  }
+
   _onClick() {
     if (this.disabled) return
     this.pickerSelect.showPopover()
@@ -175,6 +193,4 @@ class Select extends HTMLElement {
   }
 }
 
-if (!customElements.get('wc-select')) {
-  customElements.define('wc-select', Select)
-}
+export default Select
